@@ -37,28 +37,90 @@ contract IntegrationTest is Test {
     }
 
     function testIntegrationHappyPath() public {
+        string memory biometricalData = "123456789";
+        fakeWorldCoin.secureMint(me, biometricalData);
+        string memory videoUrl = "https://www.algo.algo.com";
+
+        string[] memory countries = new string[](3);
+        string memory arg = "arg";
+        string memory col = "col";
+        string memory br = "br";
+        countries[0] = arg;
+        countries[1] = col;
+        countries[2] = br;
+        vm.prank(other);
+
+        coreContract.addNewCountry(arg);
+        coreContract.addNewCountry(col);
+        coreContract.addNewCountry(br);
+
         vm.prank(me);
 
-        coreContract.addNewCountry("arg");
-        coreContract.addNewCountry("col");
-        coreContract.addNewCountry("br");
+        SubmitMeRequirement memory submitMeRequirement = SubmitMeRequirement(
+            videoUrl,
+            countries
+        );
+        coreContract.submitRequirement(submitMeRequirement);
 
-        // SubmitRequirement memory requirement = SubmitRequirement(
-        //     "https://algo.com",
-        //     true
-        // );
+        vm.startPrank(voting1);
+        coreContract.vote(arg, me, true);
+        coreContract.vote(col, me, true);
+        coreContract.vote(br, me, true);
 
-        // votingPower.submitRequirement(me, requirement);
+        vm.stopPrank();
+        vm.startPrank(voting2);
+        coreContract.vote(arg, me, true);
+        coreContract.vote(col, me, true);
+        coreContract.vote(br, me, true);
+        vm.stopPrank();
 
-        // vm.prank(voting1);
-        // votingPower.vote(me, true);
+        vm.startPrank(voting3);
+        coreContract.vote(arg, me, true);
+        coreContract.vote(col, me, true);
+        coreContract.vote(br, me, false);
+        vm.stopPrank();
+        vm.startPrank(other);
 
-        // vm.prank(voting2);
-        // votingPower.vote(me, true);
+        bool resultArg = coreContract.checkAllowed(arg, biometricalData);
+        assertEq(resultArg, true);
 
-        // vm.prank(voting3);
-        // votingPower.vote(me, false);
+        bool resultCol = coreContract.checkAllowed(col, biometricalData);
+        assertEq(resultCol, true);
 
-        // assertEq(votingPower.allowed(""), true);
+        bool resultBr = coreContract.checkAllowed(br, biometricalData);
+        assertEq(resultBr, false);
+    }
+
+    function testIntegrationGetVideos() public {
+        string memory biometricalData = "123456789";
+        fakeWorldCoin.secureMint(me, biometricalData);
+        string memory videoUrl = "https://www.algo.algo.com";
+
+        string[] memory countries = new string[](3);
+        string memory arg = "arg";
+        string memory col = "col";
+        string memory br = "br";
+        countries[0] = arg;
+        countries[1] = col;
+        countries[2] = br;
+        vm.prank(other);
+
+        coreContract.addNewCountry(arg);
+        coreContract.addNewCountry(col);
+        coreContract.addNewCountry(br);
+
+        vm.prank(me);
+
+        SubmitMeRequirement memory submitMeRequirement = SubmitMeRequirement(
+            videoUrl,
+            countries
+        );
+        coreContract.submitRequirement(submitMeRequirement);
+
+        vm.startPrank(voting1);
+        coreContract.vote(arg, me, true);
+        coreContract.vote(col, me, true);
+
+        vm.stopPrank();
     }
 }

@@ -29,8 +29,6 @@ interface IFakeWorldCoin {
 }
 
 contract VotingPower {
-    // devolver lista de videos a votar
-
     mapping(address => bool) public allowedToVote;
     mapping(address => SubmitRequirement) public requirements;
     mapping(address => Vote[]) public requirementsVoted;
@@ -58,18 +56,25 @@ contract VotingPower {
         require(!requirements[_fromRequirement].subimted);
         require(
             fakeWorldCoin.balanceOf(_fromRequirement) == 1,
-            "This address is not valid"
+            "This address does not have a WorldFakeCoin"
         );
+        _submitRequirement.subimted = true;
         requirements[_fromRequirement] = _submitRequirement;
     }
 
-    function vote(address _addressToVote, bool _vote) public {
-        require(allowedToVote[msg.sender], "You can't  vote");
+    function vote(
+        address _voteFrom,
+        address _addressToVote,
+        bool _vote
+    ) external {
+        require(allowedToVote[_voteFrom], "You can't  vote");
+
         require(
             requirements[_addressToVote].subimted,
             "There is not a requirement from this url"
         );
-        Vote memory vote = Vote(msg.sender, _vote);
+
+        Vote memory vote = Vote(_voteFrom, _vote);
         requirementsVoted[_addressToVote].push(vote);
     }
 

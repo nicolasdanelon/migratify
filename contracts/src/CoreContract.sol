@@ -27,10 +27,9 @@ contract CoreContract {
         fakeWorldCoin = _fakeWorldCoin;
     }
 
-    function submitRequirement(
-        address _fromRequirement,
-        SubmitMeRequirement memory _submitRequirement
-    ) public {
+    function submitRequirement(SubmitMeRequirement memory _submitRequirement)
+        public
+    {
         SubmitRequirement memory submitRequirement = SubmitRequirement(
             _submitRequirement.videoUrl,
             false,
@@ -42,8 +41,22 @@ contract CoreContract {
 
             VotingPower votingPower = countries[country];
 
-            votingPower.submitRequirement(_fromRequirement, submitRequirement);
+            votingPower.submitRequirement(msg.sender, submitRequirement);
         }
+    }
+
+    function vote(
+        string memory _country,
+        address _addressToVote,
+        bool _vote
+    ) public {
+        VotingPower votingPower = countries[_country];
+        require(
+            address(votingPower) != address(0),
+            "The country does not exist"
+        );
+
+        votingPower.vote(msg.sender, _addressToVote, _vote);
     }
 
     function addNewCountry(string memory _country) public {
