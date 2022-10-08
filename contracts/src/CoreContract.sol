@@ -18,7 +18,7 @@ contract CoreContract {
 
     function addNewCountry(string memory _country) public {
         require(
-            countries[_country] == address(0),
+            address(countries[_country]) == address(0),
             "You have already added this country"
         );
         uint256 neededVoteToAllow = 3;
@@ -35,9 +35,9 @@ contract CoreContract {
     {
         // Subit hash biometrico y no address
 
-        address votingPower = countries[_country];
+        VotingPower votingPower = countries[_country];
         require(
-            address(VotingPower) != address(0),
+            address(votingPower) != address(0),
             "The country is not in the list"
         );
         return votingPower.allowed(_toCheck);
