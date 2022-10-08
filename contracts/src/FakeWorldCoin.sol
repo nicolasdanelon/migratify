@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "VotingPower.sol";
+import "./VotingPower.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import "../lib/openzeppelin-contracts/contracts/utils/Counters.sol";
 
 contract FakeWorldCoin is ERC721 {
-    mapping(string => address) biometricalData;
+    mapping(string => address) public biometricalData;
     uint256 private tokenId;
 
     constructor() ERC721("FakeWorldCoin", "FWCT") {
