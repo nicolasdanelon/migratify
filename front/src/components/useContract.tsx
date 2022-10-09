@@ -14,6 +14,7 @@ export const voting_power = [
   "function allowed(string _biometricalData) public returns (bool)",
   "function getAllRequirementsList() public view returns (address[])",
   "function getRequirementsVotes(address _toCheck) public view returns ((address, bool)[])",
+  "function getRequirements(address _toCheck) public view returns ((string, bool, string[]))",
 ];
 
 export const fake_world_coin = [
