@@ -16,6 +16,7 @@ contract CoreContract {
     uint256 public neededVoteToAllow;
     address[] public allowedToVote;
     address fakeWorldCoin;
+    string[] private countriesToIterate;
 
     constructor(
         address[] memory _allowedToVote,
@@ -45,6 +46,10 @@ contract CoreContract {
         }
     }
 
+    function getCountries() public view returns (string[] memory) {
+        return countriesToIterate;
+    }
+
     function vote(
         string memory _country,
         address _addressToVote,
@@ -68,9 +73,11 @@ contract CoreContract {
         VotingPower votinPower = new VotingPower(
             allowedToVote,
             neededVoteToAllow,
-            fakeWorldCoin
+            fakeWorldCoin,
+            _country
         );
         countries[_country] = votinPower;
+        countriesToIterate.push(_country);
     }
 
     function checkAllowed(

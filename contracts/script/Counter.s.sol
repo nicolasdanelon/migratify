@@ -1,12 +1,15 @@
-// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
 
-contract CounterScript is Script {
-    function setUp() public {}
+contract MyScript is Script {
+    function run() external {
+        vm.startBroadcast();
 
-    function run() public {
-        vm.broadcast();
+        A nft = new A();
+
+        vm.stopBroadcast();
     }
 }
+
+contract A {}
