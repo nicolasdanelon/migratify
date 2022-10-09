@@ -5,6 +5,7 @@ import useContract, {
   voting_power_address,
 } from "../components/useContract";
 import { useEffect, useState } from "preact/compat";
+import { logger } from "ethers";
 
 const Migration = () => {
   const available_countries = {
@@ -21,46 +22,57 @@ const Migration = () => {
 
   useEffect(() => {
     (async () => {
-      const [voting_power_arg, voting_power_br, voting_power_col] =
-        await Promise.all([
-          core_contract_called.contract.countries("arg"),
-          core_contract_called.contract.countries("br"),
-          core_contract_called.contract.countries("col"),
-        ]);
+      try {
+        const [voting_power_arg, voting_power_br, voting_power_col] =
+          await Promise.all([
+            core_contract_called.contract.countries("arg"),
+            core_contract_called.contract.countries("br"),
+            core_contract_called.contract.countries("col"),
+          ]);
 
-      console.log({ voting_power_arg });
-      const voting_power_contract = useContract(voting_power_arg, voting_power);
+        const voting_power_contract = useContract(
+          voting_power_arg,
+          voting_power
+        );
 
-      const list_of_uploads =
-        await voting_power_contract.contract.getAllRequirementsList();
+        const list_of_uploads =
+          await voting_power_contract.contract.getAllRequirementsList();
 
-      const upload_to_show = [];
+        const upload_to_show = [];
 
-      for (let items in list_of_uploads) {
-        const list_of_voted =
-          await voting_power_contract.contract.getRequirementsVotes(items);
-        let flag = false;
+        for (let items of list_of_uploads) {
+          const list_of_voted =
+            await voting_power_contract.contract.getRequirementsVotes(items);
+          let flag = false;
 
-        for (let item in list_of_voted) {
-          // @ts-ignore
-          if (item.votedBy == voting_power_contract.provider.getSigner()) {
-            flag = true;
-            break;
+          for (let item in list_of_voted) {
+            // @ts-ignore
+            if (item.votedBy == voting_power_contract.provider.getSigner()) {
+              flag = true;
+              break;
+            }
+          }
+          if (!flag) {
+            upload_to_show.push(items);
           }
         }
-        if (!flag) {
-          upload_to_show.push(items);
+
+        const requirement_details: any[] = [];
+        for (let me of upload_to_show) {
+          const requirement_detail =
+            await voting_power_contract.contract.getRequirements(me);
+          requirement_details.push({ requirement_detail, me });
         }
-      }
 
-      const requirement_details = [];
-      for (let me in upload_to_show) {
-        const requirement_detail =
-          await voting_power_contract.contract.getRequirements(me);
-        requirement_details.push({ requirement_detail, me });
+        // @ts-ignore
+        setData((prevState) => ({
+          ...prevState,
+          // @ts-ignore
+          requirement_details,
+        }));
+      } catch (e) {
+        console.table(e);
       }
-
-      console.log({ requirement_details });
     })();
   }, []);
 
@@ -153,9 +165,13 @@ const Migration = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td
-                      class="
+                  {/* @ts-ignore */}
+                  {data && data.requirement_details
+                    ? // @ts-ignore
+                      data.requirement_details.map((item, index) => (
+                        <tr key={index}>
+                          <td
+                            className="
                            text-center text-dark
                            font-medium
                            text-base
@@ -164,11 +180,11 @@ const Migration = () => {
                            bg-[#F3F6FF]
                            border-b border-l border-[#E8E8E8]
                            "
-                    >
-                      video
-                    </td>
-                    <td
-                      class="
+                          >
+                            {item.requirement_detail[0]}
+                          </td>
+                          <td
+                            className="
                            text-center text-dark
                            font-medium
                            text-base
@@ -177,11 +193,11 @@ const Migration = () => {
                            bg-[#F3F6FF]
                            border-b border-[#E8E8E8]
                            "
-                    >
-                      0x128...122
-                    </td>
-                    <td
-                      class="
+                          >
+                            0x128...122
+                          </td>
+                          <td
+                            className="
                            text-center text-dark
                            font-medium
                            text-base
@@ -190,11 +206,11 @@ const Migration = () => {
                            bg-white
                            border-b border-[#E8E8E8]
                            "
-                    >
-                      AR
-                    </td>
-                    <td
-                      class="
+                          >
+                            AR
+                          </td>
+                          <td
+                            className="
                            text-center text-dark
                            font-medium
                            text-base
@@ -203,11 +219,11 @@ const Migration = () => {
                            bg-[#F3F6FF]
                            border-b border-[#E8E8E8]
                            "
-                    >
-                      12-08-2022
-                    </td>
-                    <td
-                      class="
+                          >
+                            12-08-2022
+                          </td>
+                          <td
+                            className="
                            text-center text-dark
                            font-medium
                            text-base
@@ -216,9 +232,9 @@ const Migration = () => {
                            bg-white
                            border-b border-r border-[#E8E8E8]
                            "
-                    >
-                      <button
-                        className="
+                          >
+                            <button
+                              className="
                               border border-green-700
                               py-1
                               px-2
@@ -227,11 +243,12 @@ const Migration = () => {
                               rounded
                               hover:bg-green-700 hover:text-white
                               "
-                      >
-                        Allow
-                      </button>{" "}
-                      <button
-                        className="
+                              onClick={() => alert(item.me)}
+                            >
+                              Allow
+                            </button>{" "}
+                            <button
+                              className="
                               border border-orange-700
                               py-1
                               px-2
@@ -240,11 +257,14 @@ const Migration = () => {
                               rounded
                               hover:bg-orange-700 hover:text-white
                               "
-                      >
-                        Interview
-                      </button>
-                    </td>
-                  </tr>
+                              onClick={() => alert(item.me)}
+                            >
+                              Interview
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    : null}
                 </tbody>
               </table>
             </div>
