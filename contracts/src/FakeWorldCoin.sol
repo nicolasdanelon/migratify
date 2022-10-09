@@ -28,6 +28,7 @@ contract FakeWorldCoin is ERC721 {
 
     function balanceByBiometricalData(string memory _hashOfBiometricalData)
         public
+        view
         returns (uint256)
     {
         address addressData = biometricalData[_hashOfBiometricalData];

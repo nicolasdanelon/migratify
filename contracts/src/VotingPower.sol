@@ -38,6 +38,7 @@ contract VotingPower {
     mapping(address => bool) public allowedToVote;
     mapping(address => SubmitRequirement) public requirements;
     mapping(address => Vote[]) public requirementsVoted;
+
     address[] private requirementsList;
     uint256 public neededVoteToAllow;
     IFakeWorldCoin public fakeWorldCoin;
