@@ -2,24 +2,27 @@ import { ethers, Contract } from "ethers";
 
 export const core_contract = [
   "function submitRequirement((string, string[])) public",
-  "function vote(string memory _country, address _addressToVote, bool _vote) public",
-  "function addNewCountry(string memory _country) public",
-  "function checkAllowed(string memory _country, string memory _biometricalData) public returns (bool)",
+  "function vote(string _country, address _addressToVote, bool _vote) public",
+  "function addNewCountry(string _country) public",
+  "function checkAllowed(string _country, string _biometricalData) public returns (bool)",
+  "function countries(string) public view returns (address)",
 ];
 
 export const voting_power = [
-  "function submitRequirement(address _fromRequirement,SubmitRequirement memory _submitRequirement) public",
+  "function submitRequirement(address _fromRequirement,SubmitRequirement _submitRequirement) public",
   "function vote(address _voteFrom,address _addressToVote,bool _vote) external",
-  "function allowed(string memory _biometricalData) public returns (bool)",
+  "function allowed(string _biometricalData) public returns (bool)",
+  "function getAllRequirementsList() public view returns (address[])",
+  "function getRequirementsVotes(address _toCheck) public view returns ((address, bool)[])",
 ];
 
 export const fake_world_coin = [
-  "function safeMint(address to, string memory uri) public",
-  "function secureMint(address _to, string memory _hashOfBiometricalData) public",
-  "function balanceByBiometricalData(string memory _hashOfBiometricalData) public returns (uint256)",
+  "function safeMint(address to, string uri) public",
+  "function secureMint(address _to, string _hashOfBiometricalData) public",
+  "function balanceByBiometricalData(string _hashOfBiometricalData) public returns (uint256)",
   "function transferFrom(address from, address to, uint256 tokenId) public virtual override",
   "function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override",
-  "function safeTransferFrom(address from,address to,uint256 tokenId,bytes memory data) public virtual override",
+  "function safeTransferFrom(address from,address to,uint256 tokenId,bytes data) public virtual override",
 ];
 
 export const core_contract_address =

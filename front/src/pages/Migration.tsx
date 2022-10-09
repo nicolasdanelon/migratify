@@ -4,6 +4,7 @@ import useContract, {
   voting_power,
   voting_power_address,
 } from "../components/useContract";
+import { useEffect, useState } from "preact/compat";
 
 const Migration = () => {
   const available_countries = {
@@ -16,18 +17,52 @@ const Migration = () => {
     core_contract_address,
     core_contract
   );
+  const [data, setData] = useState([]);
 
-  (async () => {
-    const [voting_power_arg, voting_power_br, voting_power_col] =
-      await Promise.all([
-        core_contract_called.contract.countries("arg"),
-        core_contract_called.contract.countries("br"),
-        core_contract_called.contract.countries("col"),
-      ]);
-  })();
+  useEffect(() => {
+    (async () => {
+      const [voting_power_arg, voting_power_br, voting_power_col] =
+        await Promise.all([
+          core_contract_called.contract.countries("arg"),
+          core_contract_called.contract.countries("br"),
+          core_contract_called.contract.countries("col"),
+        ]);
 
-  const voting_power_contract = useContract(voting_power_address, voting_power);
-  voting_power_contract.contract.getAllRequirementList();
+      console.log({ voting_power_arg });
+      const voting_power_contract = useContract(voting_power_arg, voting_power);
+
+      const list_of_uploads =
+        await voting_power_contract.contract.getAllRequirementsList();
+
+      const upload_to_show = [];
+
+      for (let items in list_of_uploads) {
+        const list_of_voted =
+          await voting_power_contract.contract.getRequirementsVotes(items);
+        let flag = false;
+
+        for (let item in list_of_voted) {
+          // @ts-ignore
+          if (item.votedBy == voting_power_contract.provider.getSigner()) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) {
+          upload_to_show.push(items);
+        }
+      }
+
+      const requirement_details = [];
+      for (let me in upload_to_show) {
+        const requirement_detail =
+          await voting_power_contract.contract.getRequirements(me);
+        requirement_details.push({ requirement_detail, me });
+      }
+
+      console.log({ requirement_details });
+    })();
+  }, []);
 
   return (
     <section class="bg-white py-20 lg:py-[120px] grid place-items-center">
