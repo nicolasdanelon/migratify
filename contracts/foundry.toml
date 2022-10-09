@@ -1,6 +1,7 @@
-[profile.default]
-src = 'src'
-out = 'out'
-libs = ['lib']
 
-# See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+[rpc_endpoints]
+goerli = "https://goerli.infura.io/v3/efbb3e40c88048ed8616eff275e65c23"
+
+[etherscan]
+goerli = { key = "0x7c597151c57384f3161c7a13400cb9e12bb25e8c7a8d593066b11c12864a20ec" }

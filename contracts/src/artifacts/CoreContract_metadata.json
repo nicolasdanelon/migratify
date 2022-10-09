@@ -1,0 +1,224 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_allowedToVote",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_neededVoteToAllow",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_fakeWorldCoin",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_country",
+						"type": "string"
+					}
+				],
+				"name": "addNewCountry",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "allowedToVote",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_country",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_biometricalData",
+						"type": "string"
+					}
+				],
+				"name": "checkAllowed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "countries",
+				"outputs": [
+					{
+						"internalType": "contract VotingPower",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCountries",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "neededVoteToAllow",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "videoUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "countries",
+								"type": "string[]"
+							}
+						],
+						"internalType": "struct SubmitMeRequirement",
+						"name": "_submitRequirement",
+						"type": "tuple"
+					}
+				],
+				"name": "submitRequirement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_country",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_addressToVote",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "_vote",
+						"type": "bool"
+					}
+				],
+				"name": "vote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/CoreContract.sol": "CoreContract"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"src/CoreContract.sol": {
+			"keccak256": "0xea61e673145e117c22151a8980af55b1cc99a415eb83ac717d5411f5053bf15f",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://f4c0b1fdde0c7eaf84068f55af14fc278a6f682932b023fc9f6c587cef51dd4b",
+				"dweb:/ipfs/QmepfETH2iAUbq8jhv22HxP1zw5hk8v6T544uwj3zZoVuZ"
+			]
+		},
+		"src/VotingPower.sol": {
+			"keccak256": "0x0022206da1dd4e38aef466e88f730e493dc0df7291fea8a854cd6b5d90d35ab2",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://c25069bfa93a7acc02012db81c90d1674b1e912be4a14f8bf91d1f67a689b65c",
+				"dweb:/ipfs/QmZkeZfgkNefq5Ea6ZNL61U6FzT3q4Eb5dHHVLxb9a5sBj"
+			]
+		}
+	},
+	"version": 1
+}

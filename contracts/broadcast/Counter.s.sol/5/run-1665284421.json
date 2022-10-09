@@ -1,0 +1,31 @@
+{
+  "transactions": [
+    {
+      "hash": "0x16ed0cf055098a8096ed155bf27d1d3f6a10f2d80b362d4fbce4137ec1c687a3",
+      "transactionType": "CREATE",
+      "contractName": "A",
+      "contractAddress": "0x0522e18e1e934c1f61adc43ad74b8d53f1fb4400",
+      "function": null,
+      "arguments": null,
+      "transaction": {
+        "type": "0x02",
+        "from": "0xff39c13f0e1f38e94d959f003aac0b80d6073f42",
+        "gas": "0x15491",
+        "value": "0x0",
+        "data": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220b292d4a6c2cdf7c2bb626b0fbac4f1da4fb326b3b3df82a33a5341e9ab438dfa64736f6c63430008100033",
+        "nonce": "0x2d7",
+        "accessList": []
+      },
+      "additionalContracts": []
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0x16ed0cf055098a8096ed155bf27d1d3f6a10f2d80b362d4fbce4137ec1c687a3"
+  ],
+  "path": "/Users/germankuber/Documents/Repositories/infinite/contracts/broadcast/Counter.s.sol/5/run-latest.json",
+  "returns": {},
+  "timestamp": 1665284421,
+  "commit": "fee426c"
+}

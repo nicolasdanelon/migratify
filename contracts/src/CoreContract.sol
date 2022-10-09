@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "forge-std/Vm.sol";
-import "forge-std/console2.sol";
-import "forge-std/Test.sol";
+// import "forge-std/Vm.sol";
+// import "forge-std/console2.sol";
+// import "forge-std/Test.sol";
 import "./VotingPower.sol";
 
 struct SubmitMeRequirement {
@@ -16,6 +16,7 @@ contract CoreContract {
     uint256 public neededVoteToAllow;
     address[] public allowedToVote;
     address fakeWorldCoin;
+    string[] private countriesToIterate;
 
     constructor(
         address[] memory _allowedToVote,
@@ -25,6 +26,15 @@ contract CoreContract {
         allowedToVote = _allowedToVote;
         neededVoteToAllow = _neededVoteToAllow;
         fakeWorldCoin = _fakeWorldCoin;
+    }
+
+    function addWallet(address _walletToAdd) external {
+        allowedToVote.push(_walletToAdd);
+        for (uint256 i = 0; i < countriesToIterate.length; i++) {
+            string memory country = countriesToIterate[i];
+            VotingPower votingPower = countries[country];
+            votingPower.addWallet(_walletToAdd);
+        }
     }
 
     function submitRequirement(SubmitMeRequirement memory _submitRequirement)
@@ -45,6 +55,10 @@ contract CoreContract {
         }
     }
 
+    function getCountries() public view returns (string[] memory) {
+        return countriesToIterate;
+    }
+
     function vote(
         string memory _country,
         address _addressToVote,
@@ -59,18 +73,21 @@ contract CoreContract {
         votingPower.vote(msg.sender, _addressToVote, _vote);
     }
 
-    function addNewCountry(string memory _country) public {
+    function addNewCountry(string memory _country, uint256 _neededVoteToAllow)
+        public
+    {
         require(
             address(countries[_country]) == address(0),
             "You have already added this country"
         );
-        uint256 neededVoteToAllow = 3;
         VotingPower votinPower = new VotingPower(
             allowedToVote,
-            neededVoteToAllow,
-            fakeWorldCoin
+            _neededVoteToAllow,
+            fakeWorldCoin,
+            _country
         );
         countries[_country] = votinPower;
+        countriesToIterate.push(_country);
     }
 
     function checkAllowed(
