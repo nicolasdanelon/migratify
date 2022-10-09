@@ -5,9 +5,9 @@ import { ethers } from "ethers";
 import Template from "./components/Template";
 import Home from "./pages/Home";
 import Migration from "./pages/Migration";
-// @ts-ignore
-import regeneratorRuntime from "regenerator-runtime";
 import { createContext } from "preact/compat";
+import Traveler from "./pages/Traveler";
+
 export const EthContext = createContext({ ethereum: null, provider: null });
 
 const { providers } = ethers;
@@ -27,7 +27,7 @@ const TheRouter = () => (
     <Route path="/" element={<Template />}>
       <Route path="/" element={<Home />} />
       <Route path="/migration" element={<Migration />} />
-      <Route path="/traveler" element={<Home />} />
+      <Route path="/traveler" element={<Traveler />} />
     </Route>
   </Routes>
 );

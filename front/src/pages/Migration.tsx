@@ -1,4 +1,34 @@
+import useContract, {
+  core_contract,
+  core_contract_address,
+  voting_power,
+  voting_power_address,
+} from "../components/useContract";
+
 const Migration = () => {
+  const available_countries = {
+    br: "",
+    arg: "",
+    col: "",
+  };
+
+  const core_contract_called = useContract(
+    core_contract_address,
+    core_contract
+  );
+
+  (async () => {
+    const [voting_power_arg, voting_power_br, voting_power_col] =
+      await Promise.all([
+        core_contract_called.contract.countries("arg"),
+        core_contract_called.contract.countries("br"),
+        core_contract_called.contract.countries("col"),
+      ]);
+  })();
+
+  const voting_power_contract = useContract(voting_power_address, voting_power);
+  voting_power_contract.contract.getAllRequirementList();
+
   return (
     <section class="bg-white py-20 lg:py-[120px] grid place-items-center">
       <div class="container">
