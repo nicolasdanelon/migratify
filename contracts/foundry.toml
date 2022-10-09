@@ -1,7 +1,7 @@
 
 
 [rpc_endpoints]
-goerli = "${GOERLI_RPC_URL}"
+goerli = "https://goerli.infura.io/v3/efbb3e40c88048ed8616eff275e65c23"
 
 [etherscan]
-goerli = { key = "${ETHERSCAN_KEY}" }
+goerli = { key = "0x7c597151c57384f3161c7a13400cb9e12bb25e8c7a8d593066b11c12864a20ec" }

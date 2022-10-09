@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "forge-std/Vm.sol";
-import "forge-std/console2.sol";
-import "forge-std/Test.sol";
+// import "forge-std/Vm.sol";
+// import "forge-std/console2.sol";
+// import "forge-std/Test.sol";
 
 struct SubmitRequirement {
     string videoUrl;
@@ -72,6 +72,10 @@ contract VotingPower {
         returns (Vote[] memory)
     {
         return requirementsVoted[_toCheck];
+    }
+
+    function addWallet(address _walletToAdd) external {
+        allowedToVote[_walletToAdd] = true;
     }
 
     function checkAlreadyVoted(address _requiredUser, address _voterToCheck)

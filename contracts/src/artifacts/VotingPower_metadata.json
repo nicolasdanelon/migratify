@@ -1,0 +1,375 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_allowedToVote",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_neededVoteToAllow",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_fakeWorldCoin",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_country",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_biometricalData",
+						"type": "string"
+					}
+				],
+				"name": "allowed",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "allowedToVote",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_voterToCheck",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_requirementWallet",
+						"type": "address"
+					}
+				],
+				"name": "alreadyVoted",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_requiredUser",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_voterToCheck",
+						"type": "address"
+					}
+				],
+				"name": "checkAlreadyVoted",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "fakeWorldCoin",
+				"outputs": [
+					{
+						"internalType": "contract IFakeWorldCoin",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllRequirementsList",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_toCheck",
+						"type": "address"
+					}
+				],
+				"name": "getRequirements",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "videoUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "subimted",
+								"type": "bool"
+							},
+							{
+								"internalType": "string[]",
+								"name": "countries",
+								"type": "string[]"
+							}
+						],
+						"internalType": "struct SubmitRequirement",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_toCheck",
+						"type": "address"
+					}
+				],
+				"name": "getRequirementsVotes",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "votedBy",
+								"type": "address"
+							},
+							{
+								"internalType": "bool",
+								"name": "vote",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct Vote[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "neededVoteToAllow",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "requirements",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "videoUrl",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "subimted",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "requirementsVoted",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "votedBy",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "vote",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_fromRequirement",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "videoUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "subimted",
+								"type": "bool"
+							},
+							{
+								"internalType": "string[]",
+								"name": "countries",
+								"type": "string[]"
+							}
+						],
+						"internalType": "struct SubmitRequirement",
+						"name": "_submitRequirement",
+						"type": "tuple"
+					}
+				],
+				"name": "submitRequirement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_voteFrom",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_addressToVote",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "_vote",
+						"type": "bool"
+					}
+				],
+				"name": "vote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/VotingPower.sol": "VotingPower"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"src/VotingPower.sol": {
+			"keccak256": "0x0022206da1dd4e38aef466e88f730e493dc0df7291fea8a854cd6b5d90d35ab2",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://c25069bfa93a7acc02012db81c90d1674b1e912be4a14f8bf91d1f67a689b65c",
+				"dweb:/ipfs/QmZkeZfgkNefq5Ea6ZNL61U6FzT3q4Eb5dHHVLxb9a5sBj"
+			]
+		}
+	},
+	"version": 1
+}
